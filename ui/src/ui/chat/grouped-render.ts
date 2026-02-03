@@ -190,11 +190,7 @@ function renderAvatar(role: string, assistant?: Pick<AssistantIdentity, "name" |
 }
 
 function isAvatarUrl(value: string): boolean {
-  return (
-  /^https?:\/\//i.test(value) ||
-  /^data:image\//i.test(value) ||
-  value.startsWith("/")
-  );
+  return /^https?:\/\//i.test(value) || /^data:image\//i.test(value) || value.startsWith("/");
 }
 
 function renderMessageImages(images: ImageBlock[]) {
@@ -258,10 +254,10 @@ function renderGroupedMessage(
     return html`${toolCards.map((card) => renderToolCardSidebar(card, onOpenSidebar))}`;
   }
 
-  if (!markdown && !hasToolCards && !hasImages){
+  if (!markdown && !hasToolCards && !hasImages) {
     return nothing;
   }
-  
+
   return html`
     <div class="${bubbleClasses}">
       ${canCopyMarkdown ? renderCopyAsMarkdownButton(markdown!) : nothing}
