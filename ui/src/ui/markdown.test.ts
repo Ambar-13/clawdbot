@@ -29,9 +29,15 @@ describe("toSanitizedMarkdownHtml", () => {
     expect(html).toContain("<code");
     expect(html).toContain("console.log(1)");
   });
-
-  it("renders horizontal rules", () => {
-    const html = toSanitizedMarkdownHtml("Line 1\n\n---\n\nLine 2");
+  it.each([
+    "---",
+    "----",
+    "***",
+    "*****",
+    "___",
+    " ___ ",
+  ])("renders horizontal rule for %s", (rule) => {
+    const html = toSanitizedMarkdownHtml(`Line 1\n\n${rule}\n\nLine 2`);
     expect(html).toContain("<hr");
   });
 });

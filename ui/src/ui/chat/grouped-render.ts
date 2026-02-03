@@ -287,7 +287,11 @@ function renderGroupedMessage(
               ${unsafeHTML(toSanitizedMarkdownHtml(
                 // Ensure horizontal rules (---) are padded with newlines 
                 // so the markdown parser recognizes them correctly.
-                markdown.replace(/^(---|\*\*\*|___)$/gm, '\n$1\n')
+                markdown.replace(
+                  /^(?:\s*)([-*_])(?:\s*\1){2,}\s*$/gm,
+                  '\n$&\n'
+                )
+
               ))}
             </div>`
         : nothing}
